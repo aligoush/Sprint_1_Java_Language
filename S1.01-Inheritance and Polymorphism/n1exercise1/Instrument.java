@@ -8,4 +8,7 @@ abstract class Instrument {
         this.preu = preu;
     }
     public abstract void tocar();
+    static void cridaMètodeEstàtic(){
+        System.out.println("Aquest es el mètode estàtic cridat sense instanciació");
+    }
 }
