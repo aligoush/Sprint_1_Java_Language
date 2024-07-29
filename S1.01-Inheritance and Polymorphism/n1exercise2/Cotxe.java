@@ -2,17 +2,33 @@ package n1exercise2;
 
 public class Cotxe {
 
-    static final String marca = "Land Rover";
-    static String model = "Range Rover Velar";
-    final int potència = 180;
-    /*
-    No es pot inicialitzar cap atribut al constructor
-    estàtics : es poden modificar al constructor
-    final: es una constant
-    public Cotxe (String marca, String model, int potència){
+    private static final String marca;
+    private static String model;
+    private final int potencia;
 
+    static {
+        marca = "Land Rover";
+        model = "Range Rover Velar";
     }
-     */
+    public Cotxe(){
+        potencia  = 180;
+    }
+
+    public int getPotencia() {
+        return potencia;
+    }
+
+    public static String getMarca() {
+        return marca;
+    }
+
+    public static String getModel() {
+        return model;
+    }
+
+    public static void setModel(String model) {
+        Cotxe.model = model;
+    }
 
     public static void frenar(){
         System.out.println("El vehicle està frenant");

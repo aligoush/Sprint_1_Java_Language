@@ -4,15 +4,15 @@ public class Main {
     public static void main(String[] args) {
         Cotxe cotxe1 = new Cotxe();
 
-        System.out.println(Cotxe.marca); // accés sense creació d'objecte
-        // Cotxe.marca = "fsdf"; error -> variable final, no es pot canviar
+        System.out.println(Cotxe.getMarca());
 
-        System.out.println(Cotxe.model);
-        Cotxe.model = "Defender"; // accés sense creació d'objecte
-        System.out.println(Cotxe.model);
 
-        // cotxe1.potència = 145; error -> variable final, no es pot canviar
-        System.out.println(cotxe1.potència);
+        System.out.println(Cotxe.getModel());
+        Cotxe.setModel("Defender");
+        System.out.println(Cotxe.getModel());
+
+
+        System.out.println(cotxe1.getPotencia());
 
         Cotxe.frenar();
         cotxe1.accelerar();
