@@ -1,9 +1,9 @@
 package n2exercise1;
 
-public class Telèfon {
+public class Telephone {
     private String marca;
     private String model;
-    public Telèfon(String marca, String model){
+    public Telephone(String marca, String model){
         this.marca = marca;
         this.model = model;
     }
