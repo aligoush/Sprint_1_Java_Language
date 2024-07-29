@@ -1,17 +1,17 @@
 package n2exercise1;
 
-public class Smartphone extends Telèfon implements Camera, Rellotge{
+public class Smartphone extends Telephone implements Camara, Clock{
     public Smartphone(String marca, String model){
         super(marca, model);
     }
     @Override
-    public void fotografiar(){
-        System.out.println("S’està fent una foto");
+    public void makePhoto(){
+        System.out.println("You're taking photo");
     }
 
     @Override
-    public void alarma() {
-        System.out.println("Està sonant l’alarma");
+    public void alarm() {
+        System.out.println("The alarm is ringing");
     }
 
 }
