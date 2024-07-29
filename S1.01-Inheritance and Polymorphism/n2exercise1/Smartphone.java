@@ -1,8 +1,8 @@
 package n2exercise1;
 
 public class Smartphone extends Telephone implements Camara, Clock{
-    public Smartphone(String marca, String model){
-        super(marca, model);
+    public Smartphone(String brand, String model){
+        super(brand, model);
     }
     @Override
     public void makePhoto(){
