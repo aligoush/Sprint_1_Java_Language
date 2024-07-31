@@ -3,8 +3,6 @@ package n2exercise2;
 import java.util.Objects;
 
 public class Restaurant implements Comparable<Restaurant> {
-
-
     private String name;
     private int rating;
     public Restaurant(String name, int rating) {

@@ -18,7 +18,6 @@ public class Main {
         restaurants.add(new Restaurant("Abat", 4));
         System.out.println(restaurants);
 
-
         List<Restaurant> list = new ArrayList<>(restaurants);
         Collections.sort(list);
         System.out.println(list);

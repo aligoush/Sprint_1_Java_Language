@@ -1,5 +1,7 @@
 package n1exercise1;
 
+import java.util.Objects;
+
 public class Month {
     private String name;
     public Month(String name){
@@ -17,5 +19,8 @@ public class Month {
         return  (this.name == null && other.name == null)
                 || (this.name != null && this.name.equals(other.name));
     }
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }
