@@ -4,8 +4,15 @@ public class FootballNews extends News{
     private String competition;
     private String club;
     private String player;
-    private float price = 300;
-    private int score = 5;
+    private final float price = 300;
+    private final int score = 5;
+    private final String barcelona = "barça";
+    private final String madrid = "madrid";
+    private final String championsLeague = "champions league";
+    private final String ferran = "ferran torres";
+    private final String benzema = "benzema";
+    private final String league = "league";
+
     public FootballNews (String headline,String text, String competition, String club, String player, Editor editor) {
         super(headline,text,editor);
         this.competition = competition;
@@ -28,14 +35,14 @@ public class FootballNews extends News{
     @Override
     public void getPriceNews() {
         float priceResult = this.price;
-        if(this.competition.toLowerCase().contains("lliga de campions")){
-            priceResult = priceResult + 100;
+        if(this.competition.toLowerCase().contains(championsLeague)){
+            priceResult += 100;
         }
-        if((this.club.toLowerCase().contains("barça")) || (this.club.toLowerCase().contains("madrid"))){
-            priceResult = priceResult + 100;
+        if(isBarcelonaOrMadrid(this.club)){
+            priceResult += 100;
         }
-        if((this.player.toLowerCase().contains("ferran torres")) || (this.player.toLowerCase().contains("benzema"))) {
-            priceResult = priceResult + 50;
+        if(isBenzemaOrFerranTorres(this.player)) {
+            priceResult += 50;
         }
         System.out.println("The price of this news is " + priceResult);
     }
@@ -43,18 +50,25 @@ public class FootballNews extends News{
     public void getScoreNews() {
         int scoreResult = this.score;
 
-        if (this.competition.toLowerCase().contains("lliga de campions")){
-            scoreResult = scoreResult + 3;
-        } else if(this.competition.toLowerCase().contains("lliga")){
-            scoreResult = scoreResult + 2;
+        if (this.competition.toLowerCase().contains(championsLeague)) {
+            scoreResult += 3;
+        } else if(this.competition.toLowerCase().contains(league)){
+            scoreResult += 2;
         }
-        if((this.club.toLowerCase().contains("barça")) || (this.club.toLowerCase().contains("madrid"))){
-            scoreResult = scoreResult + 1;
+        if(isBarcelonaOrMadrid(this.club)){
+            scoreResult += 1;
         }
-        if((this.player.toLowerCase().contains("ferran torres")) || (this.player.toLowerCase().contains("benzema"))) {
-            scoreResult = scoreResult + 1;
+        if(isBenzemaOrFerranTorres(this.player)) {
+            scoreResult += 1;
         }
         System.out.println("The score is " + scoreResult);
+    }
+    private boolean isBarcelonaOrMadrid(String club){
+        return (this.club.toLowerCase().contains(barcelona)) || (this.club.toLowerCase().contains(madrid));
+    }
+
+    private boolean isBenzemaOrFerranTorres(String player){
+        return ((this.player.toLowerCase().contains(ferran)) || (this.player.toLowerCase().contains(benzema)));
     }
     @Override
     public String toString() {

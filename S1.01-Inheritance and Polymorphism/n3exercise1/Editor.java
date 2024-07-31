@@ -1,16 +1,13 @@
 package n3exercise1;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class Editor {
     private String name;
     private final String DNI;
     private static float sou = 1500;
     private ArrayList<News> newsList;
-    static Scanner scanner = new Scanner(System.in);
 
     public Editor(String name, String DNI){
         this.name = name;
@@ -18,49 +15,49 @@ public class Editor {
         this.newsList = new ArrayList<>();
     }
 
-    public String getName() {
+    protected String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
-    public String getDNI() {
+    private String getDNI() {
         return DNI;
     }
 
-    public ArrayList<News> getNewsList() {
+    protected ArrayList<News> getNewsList() {
         return newsList;
     }
 
-    public void addNews (News news){
+    private void addNews (News news){
         this.newsList.add(news);
     }
     public void createNews(int type){
-        String headline = readInput("Insert the headline: ");
-        String text = readInput("Insert the text: ");
+        String headline = InputUtils.readInput("Insert the headline: ");
+        String text = InputUtils.readInput("Insert the text: ");
         News news = null;
         if(type == 1){
-            String competition = readInput("Insert the competition: ");
-            String club = readInput("Insert the club: ");
-            String player = readInput("Insert the player: ");
+            String competition = InputUtils.readInput("Insert the competition: ");
+            String club = InputUtils.readInput("Insert the club: ");
+            String player = InputUtils.readInput("Insert the player: ");
             news = new FootballNews(headline, text, competition, club, player, this);
         } else if(type == 2) {
-            String competition = readInput("Insert the competition: ");
-            String club = readInput("Insert the club: ");
+            String competition = InputUtils.readInput("Insert the competition: ");
+            String club = InputUtils.readInput("Insert the club: ");
             news = new BasketballNews(headline, text, competition, club, this);
 
         } else if(type == 3){
-            String competition = readInput("Insert the competition: ");
-            String player = readInput("Insert the player: ");
+            String competition = InputUtils.readInput("Insert the competition: ");
+            String player = InputUtils.readInput("Insert the player: ");
             news = new TennisNews(headline, text, competition, player, this);
 
         } else if(type == 4){
-            String team = readInput("Insert the team: ");
+            String team = InputUtils.readInput("Insert the team: ");
             news = new F1News(headline, text, team, this);
         } else if(type == 5){
-            String team = readInput("Insert the team: ");
+            String team = InputUtils.readInput("Insert the team: ");
             news = new MotorcyclingNews(headline, text, team, this);
         } else {
             System.out.println("There are no more types of news!");
@@ -75,25 +72,6 @@ public class Editor {
             }
 
         }
-    }
-
-    public News findNews (String headline) {
-        ArrayList<News> newsArrayList = this.getNewsList();
-        News newsFound = null;
-        if(!(newsArrayList.isEmpty())){
-            for (News news: newsArrayList) {
-                if(news.getHeadline().equalsIgnoreCase(headline)){
-                    newsFound = news;
-                }
-            }
-        } else {
-        System.out.println("There are no news for this editor!");
-    }
-        return newsFound;
-    }
-    public static String readInput(String message){
-        System.out.println(message);
-        return scanner.nextLine();
     }
 
     public void removeNews (News news){
@@ -119,26 +97,31 @@ public class Editor {
     public int hashCode(){
         return Objects.hash(name, DNI);
     }
+
     public News searchForNews(String headline){
-        News result = null;
+        News newsFound = null;
         ArrayList<News> newsArrayList = this.getNewsList();
+        if(!(newsArrayList.isEmpty())){
             for (News news: newsArrayList) {
                 if(news.getHeadline().equalsIgnoreCase(headline)){
-                    result = news;
+                    newsFound = news;
                     if(news instanceof FootballNews){
-                        result = (FootballNews) news;
+                        newsFound = (FootballNews) news;
                     } else if (news instanceof BasketballNews) {
-                        result = (BasketballNews) news;
+                        newsFound = (BasketballNews) news;
                     } else if (news instanceof TennisNews ) {
-                        result = (TennisNews) news;
+                        newsFound = (TennisNews) news;
                     }else if(news instanceof F1News){
-                        result = (F1News) news;
+                        newsFound = (F1News) news;
                     }else if(news instanceof MotorcyclingNews){
-                        result = (MotorcyclingNews) news;
+                        newsFound = (MotorcyclingNews) news;
                     }
                 }
             }
-            return result;
+        } else {
+            System.out.println("There are no news for this editor!");
+        }
+            return newsFound;
     }
 
     public void printAllNews(){

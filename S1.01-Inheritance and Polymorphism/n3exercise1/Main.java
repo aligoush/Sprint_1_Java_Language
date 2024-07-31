@@ -5,13 +5,10 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
         ArrayList<Editor> editors = new ArrayList<>();
-        int input;
+        int inputInt;
         Editor editor;
         Editor targetEditor;
-        Scanner scanner = new Scanner(System.in);
-
         do {
             System.out.println();
             System.out.println("1) Insert editor");
@@ -23,9 +20,8 @@ public class Main {
             System.out.println("7) Calculate price of the news");
             System.out.println("8) Quit");
 
-            input = scanner.nextInt();
-            scanner.nextLine();
-            switch (input) {
+            inputInt = InputUtils.readIntInput("Choose an option: ");
+            switch (inputInt) {
                 case 1:
                     String editorName = InputUtils.readInput("Enter editor's name: ");
                     String editorDNI = InputUtils.readInput("Enter editor's DNI: ");
@@ -49,7 +45,7 @@ public class Main {
                         System.out.println("3) Tennis");
                         System.out.println("4) F1");
                         System.out.println("5) Motorcycling");
-                        input = scanner.nextInt();
+                        int input = InputUtils.readIntInput("Choose an option: ");
                         targetEditor.createNews(input);
                     }
                     break;
@@ -58,7 +54,7 @@ public class Main {
                     String headline = InputUtils.readInput("Insert headline");
 
                     if(targetEditor!=null){
-                        News newsFound= targetEditor.findNews(headline);
+                        News newsFound= targetEditor.searchForNews(headline);
                         if(newsFound == null){
                             System.out.println("News not found");
                         } else {
@@ -75,14 +71,13 @@ public class Main {
                         } else {
                             System.out.println("This editor doesn't have any news");
                         }
-
                     }
                     break;
                 case 6:
                     targetEditor = Main.findEditor(editors);
                     headline = InputUtils.readInput("Insert headline");
                     if(targetEditor!=null){
-                        News newsFound= targetEditor.findNews(headline);
+                        News newsFound= targetEditor.searchForNews(headline);
                         if(newsFound == null){
                             System.out.println("News not found");
                         } else {
@@ -94,7 +89,7 @@ public class Main {
                     targetEditor = Main.findEditor(editors);
                     headline = InputUtils.readInput("Insert headline");
                     if(targetEditor!=null){
-                        News newsFound= targetEditor.findNews(headline);
+                        News newsFound= targetEditor.searchForNews(headline);
                         if(newsFound == null){
                             System.out.println("News not found");
                         } else {
@@ -103,10 +98,9 @@ public class Main {
                     }
                     break;
             }
-        } while (input != 8);
-
+        } while (inputInt != 8);
     }
-    public static Editor findEditor(ArrayList<Editor> editors){
+    private static Editor findEditor(ArrayList<Editor> editors){
         String editorName = InputUtils.readInput("Enter editor's name: ");
         String editorDNI = InputUtils.readInput("Enter editor's DNI: ");
         Editor editor = new Editor (editorName, editorDNI);
