@@ -6,13 +6,12 @@ public class Main {
         Instrument flute = new WindInstrument("Flute", 300);
         Instrument violin = new StringInstrument("Violin", 700);
         Instrument drum = new PercussionInstrument("Drum", 101.50);
-        System.out.println(flute.name + " : " + flute.price + "eu");
+        System.out.println(flute);
         flute.play();
-        System.out.println(violin.name + " : " + violin.price + "eu");
+        System.out.println(violin);
         violin.play();
-        System.out.println(drum.name + " : " + drum.price + "eu");
+        System.out.println(drum);
         drum.play();
         Instrument.callStaticMethod();
-
     }
 }

@@ -5,8 +5,6 @@ public class WindInstrument extends Instrument{
         super(name, price);
     }
 
-
-
     @Override
     public void play() {
         System.out.println("A wind instrument is playing");
