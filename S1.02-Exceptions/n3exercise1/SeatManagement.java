@@ -13,14 +13,17 @@ public class SeatManagement {
         return seats;
     }
 
-    public void addSeat(Seat seat) throws SeatOccupiedException {
-        if(findSeat(seat.getRow(), seat.getSeat())!=-1) {
+    public void addSeat(Cinema cinema, Seat seat) throws InvalidSeatPositionException, SeatOccupiedException {
+        if((cinema.getRows() < seat.getRow()) || (cinema.getSeatsPerRow() < seat.getSeat())){
+            throw new InvalidSeatPositionException();
+        }
+        if(findReservedSeat(seat.getRow(), seat.getSeat())!=-1) {
             throw new SeatOccupiedException();
         }
         seats.add(seat);
     }
 
-    public int findSeat(int row, int seatNumber) {
+    public int findReservedSeat(int row, int seatNumber) {
         for(int i = 0; i < seats.size(); i++) {
             if(seats.get(i).getRow() == row && seats.get(i).getSeat() == seatNumber) {
                 return i;
@@ -30,7 +33,7 @@ public class SeatManagement {
     }
 
     public void removeSeat(int row, int seatNumber) throws SeatEmptyException {
-        int indexSeatToRemove = findSeat(row, seatNumber);
+        int indexSeatToRemove = findReservedSeat(row, seatNumber);
         if(indexSeatToRemove == -1) {
             throw new SeatEmptyException();
         }

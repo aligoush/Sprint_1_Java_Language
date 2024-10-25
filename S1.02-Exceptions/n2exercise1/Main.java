@@ -2,12 +2,12 @@ package n2exercise1;
 
 public class Main {
     public static void main(String[] args) {
-        /*int age = Input.readByte("Insert your age: ");
-        System.out.println("Your age is " + age);
+        int input_0 = Input.readByte("Insert the byte: ");
+        System.out.println("The byte inserted " + input_0);
         int input_1 = Input.readInt("Insert an integer: ");
         System.out.println("Int inserted: " + input_1);
         float input_2 = Input.readFloat("Insert a float: ");
-        System.out.println("Float inserted: " + input_2); */
+        System.out.println("Float inserted: " + input_2);
         double input_3 = Input.readDouble("Insert a double: ");
         System.out.println("Double inserted: " + input_3);
         char input_4 = Input.readChar("Insert a character: ");

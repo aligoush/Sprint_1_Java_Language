@@ -33,6 +33,6 @@ public class Seat {
 
     @Override
     public String toString() {
-        return "Row: " + row + ", Seat: " + seatNumber + ", Person: " + person;
-    }
+        return "{Row: " + row + ", Seat: " + seatNumber + "}";
+    };
 }

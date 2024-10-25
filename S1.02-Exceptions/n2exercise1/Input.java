@@ -1,37 +1,24 @@
 package n2exercise1;
 
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
 public class Input {
     static Scanner scanner = new Scanner(System.in);
     public static byte readByte(String message){
-        byte age = 0;
+        byte number = 0;
         boolean validInput = false;
-        do{
+        do {
             try {
                 System.out.println(message);
-                age = scanner.nextByte();
-                if(age >= 0) {
-                    validInput = true;
-                } else {
-                    System.out.println("Insert a valid age");
-                }
-
-
+                number = scanner.nextByte();
             } catch (InputMismatchException e){
-                /*if(){
-                    System.out.println("Age should be numerical");
-                } */
-                System.out.println(e.getMessage());
-
-                scanner.next();
+                System.err.println("Age should be numerical");
+                scanner.nextLine();
             }
-
         } while (!validInput);
-        return age;
+        return number;
     }
+
     public static int readInt(String message){
         int input = 0;
         boolean validInput = false;
@@ -41,13 +28,13 @@ public class Input {
                 input = scanner.nextInt();
                 validInput = true;
             } catch (InputMismatchException e){
-                System.out.println(e.getMessage());
+                System.err.println("The number should be an integer");
                 scanner.next();
             }
-
         } while (!validInput);
         return input;
     }
+
     public static float readFloat(String message){
         float input = 0;
         boolean validInput = false;
@@ -57,13 +44,13 @@ public class Input {
                 input = scanner.nextFloat();
                 validInput = true;
             } catch (InputMismatchException e){
-                System.out.println(e.getMessage());
+                System.err.println("The number should be numerical");
                 scanner.next();
             }
-
         } while (!validInput);
         return input;
     }
+
     public static double readDouble(String message){
         double input = 0;
         boolean validInput = false;
@@ -73,10 +60,9 @@ public class Input {
                 input = scanner.nextDouble();
                 validInput = true;
             } catch (InputMismatchException e){
-                System.out.println(e.getMessage());
+                System.err.println("The number should be numerical");
                 scanner.next();
             }
-
         } while (!validInput);
         return input;
     }
@@ -90,10 +76,9 @@ public class Input {
                 input = scanner.next().charAt(0);
                 validInput = true;
             } catch (Exception e){
-                System.out.println(e.getMessage());
+                System.err.println("It should be a character");
                 scanner.next();
             }
-
         } while (!validInput);
         return input;
     }
@@ -106,11 +91,11 @@ public class Input {
                 System.out.println(message);
                 input = scanner.next();
                 validInput = true;
-            } catch (Exception e){
-                System.out.println(e.getMessage());
+            } catch (IllegalStateException e){
+                System.err.println("The error occured.");
+                System.out.println("Details of the exception: " + e.getMessage());
                 scanner.next();
             }
-
         } while (!validInput);
         return input;
     }
@@ -130,12 +115,10 @@ public class Input {
                     result = false;
                     validInput = true;
                 }
-
             } catch (Exception e){
-                System.out.println(e.getMessage());
+                System.err.println("The input should be 'y' or 'n' characters");
                 scanner.next();
             }
-
         } while (!validInput);
         return result;
     }

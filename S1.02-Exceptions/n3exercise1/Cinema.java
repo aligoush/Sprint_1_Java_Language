@@ -1,5 +1,6 @@
 package n3exercise1;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Cinema {
@@ -18,12 +19,27 @@ public class Cinema {
         cinemaManagement.menu();
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getSeatsPerRow() {
+        return seatsPerRow;
+    }
+
     public void askForCinemaDetails() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter the number of rows: ");
-        rows = scanner.nextInt();
-        System.out.print("Enter the number of seats per row: ");
-        seatsPerRow = scanner.nextInt();
+        do {
+            try{
+                System.out.print("Enter the number of rows: ");
+                rows = scanner.nextInt();
+                System.out.print("Enter the number of seats per row: ");
+                seatsPerRow = scanner.nextInt();
+            } catch (Exception e){
+                System.out.println("The rows and seats should be integer numbers");
+                scanner.nextLine();
+            }
+        } while (rows != (int)rows || rows <= 0 || seatsPerRow != (int)seatsPerRow || seatsPerRow <= 0);
     }
 
     public SeatManagement getSeatManagement() {

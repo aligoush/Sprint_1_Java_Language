@@ -1,6 +1,9 @@
 package n3exercise1;
 
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class CinemaManagement {
     private Cinema cinema;
@@ -11,7 +14,7 @@ public class CinemaManagement {
         scanner = new Scanner(System.in);
     }
 
-    public void menu() throws SeatEmptyException {
+    public void menu(){
         int option = -1;
         while (option != 0) {
             System.out.println("1.- Show all reserved seats.");
@@ -47,18 +50,23 @@ public class CinemaManagement {
     }
 
     public void showSeats(){
-        for(Seat seat: cinema.getSeatManagement().getSeats()){
-            System.out.println(seat);
+        if(!cinema.getSeatManagement().getSeats().isEmpty()){
+            for(Seat seat: cinema.getSeatManagement().getSeats()){
+                System.out.println(seat);
+            }
+        } else {
+            System.out.println("There are no reservations found");
         }
     }
 
     public void showSeatsByPerson(){
         System.out.println("Enter the name of the person: ");
         String person = scanner.next();
-        for(Seat seat: cinema.getSeatManagement().getSeats()){
-            if(seat.getPerson().equals(person)){
-                System.out.println(seat);
-            }
+        ArrayList<Seat> seatsReservedByPerson = (ArrayList<Seat>) cinema.getSeatManagement().getSeats().stream().filter(seat -> seat.getPerson().equals(person)).collect(Collectors.toList());
+        if(!seatsReservedByPerson.isEmpty()){
+            System.out.println("The seats reserved by " + person + " are: " + seatsReservedByPerson);
+        } else {
+            System.out.println("No reservations found for the that person");
         }
     }
 
@@ -66,27 +74,36 @@ public class CinemaManagement {
         System.out.println("Enter row, seat and person: ");
         int row = scanner.nextInt();
         int seatNumber = scanner.nextInt();
-        String person = scanner.next();
+        scanner.nextLine();
+        String person = scanner.nextLine();
         try {
-            cinema.getSeatManagement().addSeat(new Seat(row, seatNumber, person));
+            cinema.getSeatManagement().addSeat(cinema, new Seat(row, seatNumber, person));
             System.out.println("Seat successfully reserved.");
-        } catch (SeatOccupiedException e) {
-            System.out.println("The seat is already occupied.");
+        } catch (SeatOccupiedException | InvalidSeatPositionException e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public void cancelReservation() throws SeatEmptyException {
+    public void cancelReservation() {
         System.out.println("Enter row and seat: ");
         int row = scanner.nextInt();
         int seatNumber = scanner.nextInt();
-        cinema.getSeatManagement().removeSeat(row, seatNumber);
-        System.out.println("Reservation successfully cancelled.");
+        try{
+            cinema.getSeatManagement().removeSeat(row, seatNumber);
+            System.out.println("Reservation successfully cancelled.");
+        } catch(SeatEmptyException e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void cancelAllReservations(){
         System.out.println("Enter the name of the person: ");
-        String person = scanner.next();
-        cinema.getSeatManagement().getSeats().removeIf(seat -> seat.getPerson().equals(person));
-        System.out.println("All reservations by " + person + " have been canceled.");
+        String person = scanner.nextLine();
+        boolean removed = cinema.getSeatManagement().getSeats().removeIf(seat -> seat.getPerson().equals(person));
+        if(removed){
+            System.out.println("All reservations by " + person + " have been canceled.");
+        } else {
+            System.out.println("No reservations found for the specified person.");
+        }
     }
 }
