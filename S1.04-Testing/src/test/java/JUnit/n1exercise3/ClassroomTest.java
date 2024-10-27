@@ -1,5 +1,5 @@
 package JUnit.n1exercise3;
-import JUnit.n1exercise3.Classroom;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -8,9 +8,7 @@ public class ClassroomTest {
     public void arrayIndexOutOfBoundsException() {
         Classroom classroom = new Classroom();
         ArrayIndexOutOfBoundsException exception =
-                assertThrows(ArrayIndexOutOfBoundsException.class, () -> {
-                    throw new ArrayIndexOutOfBoundsException("expected message");
-                });
-        assertEquals("expected message", exception.getMessage());
+                assertThrows(ArrayIndexOutOfBoundsException.class, classroom::launchException);
+        assertEquals("Index 4 out of bounds for length 4", exception.getMessage());
     }
 }

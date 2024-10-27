@@ -7,10 +7,6 @@ public class Classroom {
         classA.launchException();
     }
     public void launchException(){
-        try{
-            String person = this.people[people.length];
-        } catch (ArrayIndexOutOfBoundsException e){
-            System.out.println(e.getMessage());
-        }
+        String person = this.people[people.length];
     }
 }

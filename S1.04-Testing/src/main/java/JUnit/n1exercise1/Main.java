@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Library library = new Library();
         library.addBook("Book1");
+        library.addBook("The Great Gatsby");
         library.addBook("Book2");
         library.addBook("Book3");
         library.addBook("Book3");
@@ -15,7 +16,6 @@ public class Main {
         for (String book : books) {
             System.out.println(book);
         }
-
         System.out.println(library.getBook(1));
     }
 }

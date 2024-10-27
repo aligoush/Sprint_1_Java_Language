@@ -1,5 +1,5 @@
 package JUnit.n1exercise1;
-import JUnit.n1exercise1.Library;
+
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,9 +41,9 @@ public class LibraryTest {
 
     @Test
     void titleIsInCorrectPosition() {
-      Assertions.assertEquals("The Great Gatsby",library.getBook(1));
+      Assertions.assertEquals("The Great Gatsby",library.getBook(2));
       Assertions.assertEquals("Little Women", library.getBook(0));
-      Assertions.assertEquals("Pride and Prejudice", library.getBook(2));
+      Assertions.assertEquals("Pride and Prejudice", library.getBook(1));
     }
 
     @Test
@@ -61,10 +61,11 @@ public class LibraryTest {
     }
 
     @Test
-    void testSortedlist(){
+    void testSortedList(){
+        library.removeBook("Pride and Prejudice");
+        library.addBook("Crime and Punishment");
         List<String> sortedBookList = new ArrayList<>(library.getBooks());
         Collections.sort(sortedBookList);
-        library.sortBooks();
-        Assertions.assertTrue(library.getBooks().equals(sortedBookList));
+        Assertions.assertEquals(library.getBooks(), sortedBookList);
     }
 }
